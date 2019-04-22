@@ -2,51 +2,57 @@ grammar Lemon;
 
 /* Lexical Rules */
 
-IF  : 'if';
+IF          : 'if';
+ELSEIF      : 'else if';
+ELSE        : 'else';
 
-AND : 'and';
-OR  : 'or';
+AND         : 'and';
+OR          : 'or';
 
-TRUE    : 'true';
-FALSE   : 'false';
+TRUE        : 'true';
+FALSE       : 'false';
 
-MULT  : '*' ;
-DIV   : '/' ;
-PLUS  : '+' ;
-MINUS : '-' ;
+MULT        : '*' ;
+DIV         : '/' ;
+PLUS        : '+' ;
+MINUS       : '-' ;
 
-GT : '>' ;
-GE : '>=' ;
-LT : '<' ;
-LE : '<=' ;
-EQ : '==' ;
-NE : '!=';
+GT          : '>' ;
+GE          : '>=' ;
+LT          : '<' ;
+LE          : '<=' ;
+EQ          : '==' ;
+NE          : '!=';
 
-FLOAT : '-'?[0-9]+('.'[0-9]+)?;
-INT     : '-'?[1-9]([0-9]+);
-STR     : '"' ~('\r' | '\n' | '"')* '"';
+FLOAT       : '-'?[0-9]+('.'[0-9]+)?;
+INT         : '-'?[1-9]([0-9]+);
+STR         : '"' ~('\r' | '\n' | '"')* '"';
 
-TYPE    : 'int' | 'string';
+TYPE        : 'int'|'string';
 
 IDENTIFIER  : [a-zA-Z_][a-zA-Z_0-9]*;
 
-LPAREN  : '(';
-RPAREN  : ')';
-SEMI    : ';';
+LPAREN      : '(';
+RPAREN      : ')';
+LBRACKET    : '{';
+RBRACKET    : '}';
+SEMI        : ';';
 
 // COMMENT and WS are stripped from the output token stream by sending to a different channel 'skip'
 
-COMMENT : '//' .+? ('\n'|EOF) -> skip;
+COMMENT     : '//' .+? ('\n'|EOF) -> skip;
 
-WS  : [ \r\t\u000C\n]+ -> skip;
+WS          : [ \r\t\u000C\n]+ -> skip;
 
 /* Grammar Rules */
 
 rule_set    : single_rule* EOF;
 
-single_rule : (if_s | declaration | show)SEMI?;
+single_rule : (declaration | show | if_s)SEMI?;
 
-if_s    : IF condition '{' conclusion SEMI? '}';
+if_s        : IF condition LBRACKET conclusion RBRACKET else_if_s* else_s?;
+else_if_s   : ELSEIF condition LBRACKET conclusion RBRACKET;
+else_s      : ELSE LBRACKET conclusion RBRACKET;
 
 condition   : logical_expression;
 conclusion  : single_rule*;
@@ -66,7 +72,7 @@ comparison_expression
 
 comparison_operand  : arithmetic_expression;
 
-comp_operator   : GT | GE | LT | LE | EQ | NE;
+comp_operator       : GT | GE | LT | LE | EQ | NE;
 
 arithmetic_expression
     : arithmetic_expression MULT arithmetic_expression  # ArithmeticExpressionMult

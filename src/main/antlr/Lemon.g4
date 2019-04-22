@@ -50,7 +50,7 @@ rule_set    : single_rule* EOF;
 
 single_rule : (declaration | show | if_s)SEMI?;
 
-if_s        : IF condition LBRACKET conclusion RBRACKET else_if_s* else_s?;
+if_s        : IF condition LBRACKET conclusion RBRACKET (else_if_s)* (else_s)?;
 else_if_s   : ELSEIF condition LBRACKET conclusion RBRACKET;
 else_s      : ELSE LBRACKET conclusion RBRACKET;
 

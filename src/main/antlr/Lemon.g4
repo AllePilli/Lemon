@@ -14,6 +14,7 @@ FALSE       : 'false';
 
 MULT        : '*' ;
 DIV         : '/' ;
+MOD         : '%' ;
 PLUS        : '+' ;
 MINUS       : '-' ;
 
@@ -27,6 +28,7 @@ NE          : '!=';
 FLOAT       : '-'?[0-9]+('.'[0-9]+)?;
 INT         : '-'?[1-9]([0-9]+);
 STR         : '"' ~('\r' | '\n' | '"')* '"';
+NUL         : 'nul';
 
 TYPE        : 'int'|'string';
 
@@ -77,6 +79,7 @@ comp_operator       : GT | GE | LT | LE | EQ | NE;
 arithmetic_expression
     : arithmetic_expression MULT arithmetic_expression  # ArithmeticExpressionMult
     | arithmetic_expression DIV arithmetic_expression   # ArithmeticExpressionDiv
+    | arithmetic_expression MOD arithmetic_expression   # ArithmeticExpressionMod
     | arithmetic_expression PLUS arithmetic_expression  # ArithmeticExpressionPlus
     | arithmetic_expression MINUS arithmetic_expression # ArithmeticExpressionMinus
     | MINUS arithmetic_expression                       # ArithmeticExpressionNegation
@@ -90,9 +93,29 @@ logical_entity
     ;
 
 numeric_entity
-    : (FLOAT|INT)   # NumericConst
+    : number_atom   # NumericConst
     | IDENTIFIER    # NumbericVariable
     ;
 
-declaration : TYPE IDENTIFIER '=' (FLOAT|INT|STR);
-show        : 'show' (FLOAT|INT|STR|IDENTIFIER);
+declaration : TYPE IDENTIFIER '=' expression;
+show        : 'show' expression;
+
+expression
+    : arithmetic_expression # ExpressionArithmetic
+    | logical_expression    # ExpressionLogical
+    | atom                  # ExpressionAtom
+    ;
+
+number_atom
+    : INT   # IntAtom
+    | FLOAT # FloatAtom
+    ;
+
+atom
+    : LPAREN expression RPAREN  # ParenExpression
+    | number_atom               # NumberAtom
+    | (TRUE | FALSE)            # BooleanAtom
+    | IDENTIFIER                # IdentifierAtom
+    | STR                       # StringAtom
+    | NUL                       # NulAtom
+    ;

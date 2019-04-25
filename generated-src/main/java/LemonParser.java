@@ -17,21 +17,22 @@ public class LemonParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, IF=3, ELSEIF=4, ELSE=5, AND=6, OR=7, TRUE=8, FALSE=9, 
-		MULT=10, DIV=11, PLUS=12, MINUS=13, GT=14, GE=15, LT=16, LE=17, EQ=18, 
-		NE=19, FLOAT=20, INT=21, STR=22, TYPE=23, IDENTIFIER=24, LPAREN=25, RPAREN=26, 
-		LBRACKET=27, RBRACKET=28, SEMI=29, COMMENT=30, WS=31;
+		MULT=10, DIV=11, MOD=12, PLUS=13, MINUS=14, GT=15, GE=16, LT=17, LE=18, 
+		EQ=19, NE=20, FLOAT=21, INT=22, STR=23, NUL=24, TYPE=25, IDENTIFIER=26, 
+		LPAREN=27, RPAREN=28, LBRACKET=29, RBRACKET=30, SEMI=31, COMMENT=32, WS=33;
 	public static final int
 		RULE_rule_set = 0, RULE_single_rule = 1, RULE_if_s = 2, RULE_else_if_s = 3, 
 		RULE_else_s = 4, RULE_condition = 5, RULE_conclusion = 6, RULE_logical_expression = 7, 
 		RULE_comparison_expression = 8, RULE_comparison_operand = 9, RULE_comp_operator = 10, 
 		RULE_arithmetic_expression = 11, RULE_logical_entity = 12, RULE_numeric_entity = 13, 
-		RULE_declaration = 14, RULE_show = 15;
+		RULE_declaration = 14, RULE_show = 15, RULE_expression = 16, RULE_number_atom = 17, 
+		RULE_atom = 18;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"rule_set", "single_rule", "if_s", "else_if_s", "else_s", "condition", 
 			"conclusion", "logical_expression", "comparison_expression", "comparison_operand", 
 			"comp_operator", "arithmetic_expression", "logical_entity", "numeric_entity", 
-			"declaration", "show"
+			"declaration", "show", "expression", "number_atom", "atom"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -39,18 +40,18 @@ public class LemonParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'='", "'show'", "'if'", "'else if'", "'else'", "'and'", "'or'", 
-			"'true'", "'false'", "'*'", "'/'", "'+'", "'-'", "'>'", "'>='", "'<'", 
-			"'<='", "'=='", "'!='", null, null, null, null, null, "'('", "')'", "'{'", 
-			"'}'", "';'"
+			"'true'", "'false'", "'*'", "'/'", "'%'", "'+'", "'-'", "'>'", "'>='", 
+			"'<'", "'<='", "'=='", "'!='", null, null, null, "'nul'", null, null, 
+			"'('", "')'", "'{'", "'}'", "';'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, "IF", "ELSEIF", "ELSE", "AND", "OR", "TRUE", "FALSE", 
-			"MULT", "DIV", "PLUS", "MINUS", "GT", "GE", "LT", "LE", "EQ", "NE", "FLOAT", 
-			"INT", "STR", "TYPE", "IDENTIFIER", "LPAREN", "RPAREN", "LBRACKET", "RBRACKET", 
-			"SEMI", "COMMENT", "WS"
+			"MULT", "DIV", "MOD", "PLUS", "MINUS", "GT", "GE", "LT", "LE", "EQ", 
+			"NE", "FLOAT", "INT", "STR", "NUL", "TYPE", "IDENTIFIER", "LPAREN", "RPAREN", 
+			"LBRACKET", "RBRACKET", "SEMI", "COMMENT", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -138,21 +139,21 @@ public class LemonParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(35);
+			setState(41);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << IF) | (1L << TYPE))) != 0)) {
 				{
 				{
-				setState(32);
+				setState(38);
 				single_rule();
 				}
 				}
-				setState(37);
+				setState(43);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(38);
+			setState(44);
 			match(EOF);
 			}
 		}
@@ -204,36 +205,36 @@ public class LemonParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(43);
+			setState(49);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TYPE:
 				{
-				setState(40);
+				setState(46);
 				declaration();
 				}
 				break;
 			case T__1:
 				{
-				setState(41);
+				setState(47);
 				show();
 				}
 				break;
 			case IF:
 				{
-				setState(42);
+				setState(48);
 				if_s();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(46);
+			setState(52);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==SEMI) {
 				{
-				setState(45);
+				setState(51);
 				match(SEMI);
 				}
 			}
@@ -296,36 +297,36 @@ public class LemonParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(48);
+			setState(54);
 			match(IF);
-			setState(49);
+			setState(55);
 			condition();
-			setState(50);
-			match(LBRACKET);
-			setState(51);
-			conclusion();
-			setState(52);
-			match(RBRACKET);
 			setState(56);
+			match(LBRACKET);
+			setState(57);
+			conclusion();
+			setState(58);
+			match(RBRACKET);
+			setState(62);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==ELSEIF) {
 				{
 				{
-				setState(53);
+				setState(59);
 				else_if_s();
 				}
 				}
-				setState(58);
+				setState(64);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(60);
+			setState(66);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==ELSE) {
 				{
-				setState(59);
+				setState(65);
 				else_s();
 				}
 			}
@@ -378,15 +379,15 @@ public class LemonParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(62);
+			setState(68);
 			match(ELSEIF);
-			setState(63);
+			setState(69);
 			condition();
-			setState(64);
+			setState(70);
 			match(LBRACKET);
-			setState(65);
+			setState(71);
 			conclusion();
-			setState(66);
+			setState(72);
 			match(RBRACKET);
 			}
 		}
@@ -433,13 +434,13 @@ public class LemonParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(68);
+			setState(74);
 			match(ELSE);
-			setState(69);
+			setState(75);
 			match(LBRACKET);
-			setState(70);
+			setState(76);
 			conclusion();
-			setState(71);
+			setState(77);
 			match(RBRACKET);
 			}
 		}
@@ -483,7 +484,7 @@ public class LemonParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(73);
+			setState(79);
 			logical_expression(0);
 			}
 		}
@@ -531,17 +532,17 @@ public class LemonParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(78);
+			setState(84);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << IF) | (1L << TYPE))) != 0)) {
 				{
 				{
-				setState(75);
+				setState(81);
 				single_rule();
 				}
 				}
-				setState(80);
+				setState(86);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -690,7 +691,7 @@ public class LemonParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(88);
+			setState(94);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
@@ -699,7 +700,7 @@ public class LemonParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(82);
+				setState(88);
 				comparison_expression();
 				}
 				break;
@@ -708,11 +709,11 @@ public class LemonParser extends Parser {
 				_localctx = new LogicalExpressionInParenContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(83);
+				setState(89);
 				match(LPAREN);
-				setState(84);
+				setState(90);
 				logical_expression(0);
-				setState(85);
+				setState(91);
 				match(RPAREN);
 				}
 				break;
@@ -721,13 +722,13 @@ public class LemonParser extends Parser {
 				_localctx = new LogicalEntityContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(87);
+				setState(93);
 				logical_entity();
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(98);
+			setState(104);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -735,18 +736,18 @@ public class LemonParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(96);
+					setState(102);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 					case 1:
 						{
 						_localctx = new LogicalExpressionAndContext(new Logical_expressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_logical_expression);
-						setState(90);
+						setState(96);
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(91);
+						setState(97);
 						match(AND);
-						setState(92);
+						setState(98);
 						logical_expression(6);
 						}
 						break;
@@ -754,18 +755,18 @@ public class LemonParser extends Parser {
 						{
 						_localctx = new LogicalExpressionOrContext(new Logical_expressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_logical_expression);
-						setState(93);
+						setState(99);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(94);
+						setState(100);
 						match(OR);
-						setState(95);
+						setState(101);
 						logical_expression(5);
 						}
 						break;
 					}
 					} 
 				}
-				setState(100);
+				setState(106);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
 			}
@@ -844,18 +845,18 @@ public class LemonParser extends Parser {
 		Comparison_expressionContext _localctx = new Comparison_expressionContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_comparison_expression);
 		try {
-			setState(109);
+			setState(115);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
 			case 1:
 				_localctx = new ComparisonExpressionWithOperatorContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(101);
+				setState(107);
 				comparison_operand();
-				setState(102);
+				setState(108);
 				comp_operator();
-				setState(103);
+				setState(109);
 				comparison_operand();
 				}
 				break;
@@ -863,11 +864,11 @@ public class LemonParser extends Parser {
 				_localctx = new ComparisonExpressionParensContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(105);
+				setState(111);
 				match(LPAREN);
-				setState(106);
+				setState(112);
 				comparison_expression();
-				setState(107);
+				setState(113);
 				match(RPAREN);
 				}
 				break;
@@ -913,7 +914,7 @@ public class LemonParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(111);
+			setState(117);
 			arithmetic_expression(0);
 			}
 		}
@@ -961,7 +962,7 @@ public class LemonParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(113);
+			setState(119);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GT) | (1L << GE) | (1L << LT) | (1L << LE) | (1L << EQ) | (1L << NE))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1038,6 +1039,29 @@ public class LemonParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitArithmeticExpressionMinus(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ArithmeticExpressionModContext extends Arithmetic_expressionContext {
+		public List<Arithmetic_expressionContext> arithmetic_expression() {
+			return getRuleContexts(Arithmetic_expressionContext.class);
+		}
+		public Arithmetic_expressionContext arithmetic_expression(int i) {
+			return getRuleContext(Arithmetic_expressionContext.class,i);
+		}
+		public TerminalNode MOD() { return getToken(LemonParser.MOD, 0); }
+		public ArithmeticExpressionModContext(Arithmetic_expressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).enterArithmeticExpressionMod(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).exitArithmeticExpressionMod(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitArithmeticExpressionMod(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1163,7 +1187,7 @@ public class LemonParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(123);
+			setState(129);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case MINUS:
@@ -1172,9 +1196,9 @@ public class LemonParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(116);
+				setState(122);
 				match(MINUS);
-				setState(117);
+				setState(123);
 				arithmetic_expression(3);
 				}
 				break;
@@ -1183,11 +1207,11 @@ public class LemonParser extends Parser {
 				_localctx = new ArithmeticExpressionParensContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(118);
+				setState(124);
 				match(LPAREN);
-				setState(119);
+				setState(125);
 				arithmetic_expression(0);
-				setState(120);
+				setState(126);
 				match(RPAREN);
 				}
 				break;
@@ -1198,7 +1222,7 @@ public class LemonParser extends Parser {
 				_localctx = new ArithmeticExpressionNumericEntityContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(122);
+				setState(128);
 				numeric_entity();
 				}
 				break;
@@ -1206,7 +1230,7 @@ public class LemonParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(139);
+			setState(148);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,12,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -1214,61 +1238,73 @@ public class LemonParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(137);
+					setState(146);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ArithmeticExpressionMultContext(new Arithmetic_expressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_arithmetic_expression);
-						setState(125);
-						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(126);
+						setState(131);
+						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
+						setState(132);
 						match(MULT);
-						setState(127);
-						arithmetic_expression(8);
+						setState(133);
+						arithmetic_expression(9);
 						}
 						break;
 					case 2:
 						{
 						_localctx = new ArithmeticExpressionDivContext(new Arithmetic_expressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_arithmetic_expression);
-						setState(128);
-						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(129);
+						setState(134);
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
+						setState(135);
 						match(DIV);
-						setState(130);
-						arithmetic_expression(7);
+						setState(136);
+						arithmetic_expression(8);
 						}
 						break;
 					case 3:
 						{
-						_localctx = new ArithmeticExpressionPlusContext(new Arithmetic_expressionContext(_parentctx, _parentState));
+						_localctx = new ArithmeticExpressionModContext(new Arithmetic_expressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_arithmetic_expression);
-						setState(131);
-						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(132);
-						match(PLUS);
-						setState(133);
-						arithmetic_expression(6);
+						setState(137);
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
+						setState(138);
+						match(MOD);
+						setState(139);
+						arithmetic_expression(7);
 						}
 						break;
 					case 4:
 						{
+						_localctx = new ArithmeticExpressionPlusContext(new Arithmetic_expressionContext(_parentctx, _parentState));
+						pushNewRecursionContext(_localctx, _startState, RULE_arithmetic_expression);
+						setState(140);
+						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
+						setState(141);
+						match(PLUS);
+						setState(142);
+						arithmetic_expression(6);
+						}
+						break;
+					case 5:
+						{
 						_localctx = new ArithmeticExpressionMinusContext(new Arithmetic_expressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_arithmetic_expression);
-						setState(134);
+						setState(143);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(135);
+						setState(144);
 						match(MINUS);
-						setState(136);
+						setState(145);
 						arithmetic_expression(5);
 						}
 						break;
 					}
 					} 
 				}
-				setState(141);
+				setState(150);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,12,_ctx);
 			}
@@ -1337,7 +1373,7 @@ public class LemonParser extends Parser {
 		enterRule(_localctx, 24, RULE_logical_entity);
 		int _la;
 		try {
-			setState(144);
+			setState(153);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TRUE:
@@ -1345,7 +1381,7 @@ public class LemonParser extends Parser {
 				_localctx = new LogicalConstContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(142);
+				setState(151);
 				_la = _input.LA(1);
 				if ( !(_la==TRUE || _la==FALSE) ) {
 				_errHandler.recoverInline(this);
@@ -1361,7 +1397,7 @@ public class LemonParser extends Parser {
 				_localctx = new LogivalVariableContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(143);
+				setState(152);
 				match(IDENTIFIER);
 				}
 				break;
@@ -1392,8 +1428,9 @@ public class LemonParser extends Parser {
 		}
 	}
 	public static class NumericConstContext extends Numeric_entityContext {
-		public TerminalNode FLOAT() { return getToken(LemonParser.FLOAT, 0); }
-		public TerminalNode INT() { return getToken(LemonParser.INT, 0); }
+		public Number_atomContext number_atom() {
+			return getRuleContext(Number_atomContext.class,0);
+		}
 		public NumericConstContext(Numeric_entityContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -1430,9 +1467,8 @@ public class LemonParser extends Parser {
 	public final Numeric_entityContext numeric_entity() throws RecognitionException {
 		Numeric_entityContext _localctx = new Numeric_entityContext(_ctx, getState());
 		enterRule(_localctx, 26, RULE_numeric_entity);
-		int _la;
 		try {
-			setState(148);
+			setState(157);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case FLOAT:
@@ -1440,23 +1476,15 @@ public class LemonParser extends Parser {
 				_localctx = new NumericConstContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(146);
-				_la = _input.LA(1);
-				if ( !(_la==FLOAT || _la==INT) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				setState(155);
+				number_atom();
 				}
 				break;
 			case IDENTIFIER:
 				_localctx = new NumbericVariableContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(147);
+				setState(156);
 				match(IDENTIFIER);
 				}
 				break;
@@ -1478,9 +1506,9 @@ public class LemonParser extends Parser {
 	public static class DeclarationContext extends ParserRuleContext {
 		public TerminalNode TYPE() { return getToken(LemonParser.TYPE, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(LemonParser.IDENTIFIER, 0); }
-		public TerminalNode FLOAT() { return getToken(LemonParser.FLOAT, 0); }
-		public TerminalNode INT() { return getToken(LemonParser.INT, 0); }
-		public TerminalNode STR() { return getToken(LemonParser.STR, 0); }
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
 		public DeclarationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1503,26 +1531,17 @@ public class LemonParser extends Parser {
 	public final DeclarationContext declaration() throws RecognitionException {
 		DeclarationContext _localctx = new DeclarationContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_declaration);
-		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(150);
+			setState(159);
 			match(TYPE);
-			setState(151);
+			setState(160);
 			match(IDENTIFIER);
-			setState(152);
+			setState(161);
 			match(T__0);
-			setState(153);
-			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FLOAT) | (1L << INT) | (1L << STR))) != 0)) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
+			setState(162);
+			expression();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1537,10 +1556,9 @@ public class LemonParser extends Parser {
 	}
 
 	public static class ShowContext extends ParserRuleContext {
-		public TerminalNode FLOAT() { return getToken(LemonParser.FLOAT, 0); }
-		public TerminalNode INT() { return getToken(LemonParser.INT, 0); }
-		public TerminalNode STR() { return getToken(LemonParser.STR, 0); }
-		public TerminalNode IDENTIFIER() { return getToken(LemonParser.IDENTIFIER, 0); }
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
 		public ShowContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1563,22 +1581,416 @@ public class LemonParser extends Parser {
 	public final ShowContext show() throws RecognitionException {
 		ShowContext _localctx = new ShowContext(_ctx, getState());
 		enterRule(_localctx, 30, RULE_show);
-		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(155);
+			setState(164);
 			match(T__1);
-			setState(156);
-			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FLOAT) | (1L << INT) | (1L << STR) | (1L << IDENTIFIER))) != 0)) ) {
-			_errHandler.recoverInline(this);
+			setState(165);
+			expression();
 			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ExpressionContext extends ParserRuleContext {
+		public ExpressionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_expression; }
+	 
+		public ExpressionContext() { }
+		public void copyFrom(ExpressionContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class ExpressionLogicalContext extends ExpressionContext {
+		public Logical_expressionContext logical_expression() {
+			return getRuleContext(Logical_expressionContext.class,0);
+		}
+		public ExpressionLogicalContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).enterExpressionLogical(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).exitExpressionLogical(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitExpressionLogical(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ExpressionArithmeticContext extends ExpressionContext {
+		public Arithmetic_expressionContext arithmetic_expression() {
+			return getRuleContext(Arithmetic_expressionContext.class,0);
+		}
+		public ExpressionArithmeticContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).enterExpressionArithmetic(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).exitExpressionArithmetic(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitExpressionArithmetic(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ExpressionAtomContext extends ExpressionContext {
+		public AtomContext atom() {
+			return getRuleContext(AtomContext.class,0);
+		}
+		public ExpressionAtomContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).enterExpressionAtom(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).exitExpressionAtom(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitExpressionAtom(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ExpressionContext expression() throws RecognitionException {
+		ExpressionContext _localctx = new ExpressionContext(_ctx, getState());
+		enterRule(_localctx, 32, RULE_expression);
+		try {
+			setState(170);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
+			case 1:
+				_localctx = new ExpressionArithmeticContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(167);
+				arithmetic_expression(0);
+				}
+				break;
+			case 2:
+				_localctx = new ExpressionLogicalContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(168);
+				logical_expression(0);
+				}
+				break;
+			case 3:
+				_localctx = new ExpressionAtomContext(_localctx);
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(169);
+				atom();
+				}
+				break;
 			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Number_atomContext extends ParserRuleContext {
+		public Number_atomContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_number_atom; }
+	 
+		public Number_atomContext() { }
+		public void copyFrom(Number_atomContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class FloatAtomContext extends Number_atomContext {
+		public TerminalNode FLOAT() { return getToken(LemonParser.FLOAT, 0); }
+		public FloatAtomContext(Number_atomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).enterFloatAtom(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).exitFloatAtom(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitFloatAtom(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class IntAtomContext extends Number_atomContext {
+		public TerminalNode INT() { return getToken(LemonParser.INT, 0); }
+		public IntAtomContext(Number_atomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).enterIntAtom(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).exitIntAtom(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitIntAtom(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Number_atomContext number_atom() throws RecognitionException {
+		Number_atomContext _localctx = new Number_atomContext(_ctx, getState());
+		enterRule(_localctx, 34, RULE_number_atom);
+		try {
+			setState(174);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case INT:
+				_localctx = new IntAtomContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(172);
+				match(INT);
+				}
+				break;
+			case FLOAT:
+				_localctx = new FloatAtomContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(173);
+				match(FLOAT);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class AtomContext extends ParserRuleContext {
+		public AtomContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_atom; }
+	 
+		public AtomContext() { }
+		public void copyFrom(AtomContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class NumberAtomContext extends AtomContext {
+		public Number_atomContext number_atom() {
+			return getRuleContext(Number_atomContext.class,0);
+		}
+		public NumberAtomContext(AtomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).enterNumberAtom(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).exitNumberAtom(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitNumberAtom(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class StringAtomContext extends AtomContext {
+		public TerminalNode STR() { return getToken(LemonParser.STR, 0); }
+		public StringAtomContext(AtomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).enterStringAtom(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).exitStringAtom(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitStringAtom(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class NulAtomContext extends AtomContext {
+		public TerminalNode NUL() { return getToken(LemonParser.NUL, 0); }
+		public NulAtomContext(AtomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).enterNulAtom(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).exitNulAtom(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitNulAtom(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ParenExpressionContext extends AtomContext {
+		public TerminalNode LPAREN() { return getToken(LemonParser.LPAREN, 0); }
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public TerminalNode RPAREN() { return getToken(LemonParser.RPAREN, 0); }
+		public ParenExpressionContext(AtomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).enterParenExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).exitParenExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitParenExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class BooleanAtomContext extends AtomContext {
+		public TerminalNode TRUE() { return getToken(LemonParser.TRUE, 0); }
+		public TerminalNode FALSE() { return getToken(LemonParser.FALSE, 0); }
+		public BooleanAtomContext(AtomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).enterBooleanAtom(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).exitBooleanAtom(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitBooleanAtom(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class IdentifierAtomContext extends AtomContext {
+		public TerminalNode IDENTIFIER() { return getToken(LemonParser.IDENTIFIER, 0); }
+		public IdentifierAtomContext(AtomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).enterIdentifierAtom(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LemonListener ) ((LemonListener)listener).exitIdentifierAtom(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LemonVisitor ) return ((LemonVisitor<? extends T>)visitor).visitIdentifierAtom(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final AtomContext atom() throws RecognitionException {
+		AtomContext _localctx = new AtomContext(_ctx, getState());
+		enterRule(_localctx, 36, RULE_atom);
+		int _la;
+		try {
+			setState(185);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case LPAREN:
+				_localctx = new ParenExpressionContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(176);
+				match(LPAREN);
+				setState(177);
+				expression();
+				setState(178);
+				match(RPAREN);
+				}
+				break;
+			case FLOAT:
+			case INT:
+				_localctx = new NumberAtomContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(180);
+				number_atom();
+				}
+				break;
+			case TRUE:
+			case FALSE:
+				_localctx = new BooleanAtomContext(_localctx);
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(181);
+				_la = _input.LA(1);
+				if ( !(_la==TRUE || _la==FALSE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
+				break;
+			case IDENTIFIER:
+				_localctx = new IdentifierAtomContext(_localctx);
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(182);
+				match(IDENTIFIER);
+				}
+				break;
+			case STR:
+				_localctx = new StringAtomContext(_localctx);
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(183);
+				match(STR);
+				}
+				break;
+			case NUL:
+				_localctx = new NulAtomContext(_localctx);
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(184);
+				match(NUL);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1613,62 +2025,77 @@ public class LemonParser extends Parser {
 	private boolean arithmetic_expression_sempred(Arithmetic_expressionContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 2:
-			return precpred(_ctx, 7);
+			return precpred(_ctx, 8);
 		case 3:
-			return precpred(_ctx, 6);
+			return precpred(_ctx, 7);
 		case 4:
-			return precpred(_ctx, 5);
+			return precpred(_ctx, 6);
 		case 5:
+			return precpred(_ctx, 5);
+		case 6:
 			return precpred(_ctx, 4);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3!\u00a1\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3#\u00be\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
-		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\3\2\7\2$\n"+
-		"\2\f\2\16\2\'\13\2\3\2\3\2\3\3\3\3\3\3\5\3.\n\3\3\3\5\3\61\n\3\3\4\3\4"+
-		"\3\4\3\4\3\4\3\4\7\49\n\4\f\4\16\4<\13\4\3\4\5\4?\n\4\3\5\3\5\3\5\3\5"+
-		"\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\b\7\bO\n\b\f\b\16\bR\13\b\3\t\3"+
-		"\t\3\t\3\t\3\t\3\t\3\t\5\t[\n\t\3\t\3\t\3\t\3\t\3\t\3\t\7\tc\n\t\f\t\16"+
-		"\tf\13\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\np\n\n\3\13\3\13\3\f\3\f\3"+
-		"\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\5\r~\n\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3"+
-		"\r\3\r\3\r\3\r\3\r\7\r\u008c\n\r\f\r\16\r\u008f\13\r\3\16\3\16\5\16\u0093"+
-		"\n\16\3\17\3\17\5\17\u0097\n\17\3\20\3\20\3\20\3\20\3\20\3\21\3\21\3\21"+
-		"\3\21\2\4\20\30\22\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \2\7\3\2\20"+
-		"\25\3\2\n\13\3\2\26\27\3\2\26\30\4\2\26\30\32\32\2\u00a4\2%\3\2\2\2\4"+
-		"-\3\2\2\2\6\62\3\2\2\2\b@\3\2\2\2\nF\3\2\2\2\fK\3\2\2\2\16P\3\2\2\2\20"+
-		"Z\3\2\2\2\22o\3\2\2\2\24q\3\2\2\2\26s\3\2\2\2\30}\3\2\2\2\32\u0092\3\2"+
-		"\2\2\34\u0096\3\2\2\2\36\u0098\3\2\2\2 \u009d\3\2\2\2\"$\5\4\3\2#\"\3"+
-		"\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2&(\3\2\2\2\'%\3\2\2\2()\7\2\2\3)"+
-		"\3\3\2\2\2*.\5\36\20\2+.\5 \21\2,.\5\6\4\2-*\3\2\2\2-+\3\2\2\2-,\3\2\2"+
-		"\2.\60\3\2\2\2/\61\7\37\2\2\60/\3\2\2\2\60\61\3\2\2\2\61\5\3\2\2\2\62"+
-		"\63\7\5\2\2\63\64\5\f\7\2\64\65\7\35\2\2\65\66\5\16\b\2\66:\7\36\2\2\67"+
-		"9\5\b\5\28\67\3\2\2\29<\3\2\2\2:8\3\2\2\2:;\3\2\2\2;>\3\2\2\2<:\3\2\2"+
-		"\2=?\5\n\6\2>=\3\2\2\2>?\3\2\2\2?\7\3\2\2\2@A\7\6\2\2AB\5\f\7\2BC\7\35"+
-		"\2\2CD\5\16\b\2DE\7\36\2\2E\t\3\2\2\2FG\7\7\2\2GH\7\35\2\2HI\5\16\b\2"+
-		"IJ\7\36\2\2J\13\3\2\2\2KL\5\20\t\2L\r\3\2\2\2MO\5\4\3\2NM\3\2\2\2OR\3"+
-		"\2\2\2PN\3\2\2\2PQ\3\2\2\2Q\17\3\2\2\2RP\3\2\2\2ST\b\t\1\2T[\5\22\n\2"+
-		"UV\7\33\2\2VW\5\20\t\2WX\7\34\2\2X[\3\2\2\2Y[\5\32\16\2ZS\3\2\2\2ZU\3"+
-		"\2\2\2ZY\3\2\2\2[d\3\2\2\2\\]\f\7\2\2]^\7\b\2\2^c\5\20\t\b_`\f\6\2\2`"+
-		"a\7\t\2\2ac\5\20\t\7b\\\3\2\2\2b_\3\2\2\2cf\3\2\2\2db\3\2\2\2de\3\2\2"+
-		"\2e\21\3\2\2\2fd\3\2\2\2gh\5\24\13\2hi\5\26\f\2ij\5\24\13\2jp\3\2\2\2"+
-		"kl\7\33\2\2lm\5\22\n\2mn\7\34\2\2np\3\2\2\2og\3\2\2\2ok\3\2\2\2p\23\3"+
-		"\2\2\2qr\5\30\r\2r\25\3\2\2\2st\t\2\2\2t\27\3\2\2\2uv\b\r\1\2vw\7\17\2"+
-		"\2w~\5\30\r\5xy\7\33\2\2yz\5\30\r\2z{\7\34\2\2{~\3\2\2\2|~\5\34\17\2}"+
-		"u\3\2\2\2}x\3\2\2\2}|\3\2\2\2~\u008d\3\2\2\2\177\u0080\f\t\2\2\u0080\u0081"+
-		"\7\f\2\2\u0081\u008c\5\30\r\n\u0082\u0083\f\b\2\2\u0083\u0084\7\r\2\2"+
-		"\u0084\u008c\5\30\r\t\u0085\u0086\f\7\2\2\u0086\u0087\7\16\2\2\u0087\u008c"+
-		"\5\30\r\b\u0088\u0089\f\6\2\2\u0089\u008a\7\17\2\2\u008a\u008c\5\30\r"+
-		"\7\u008b\177\3\2\2\2\u008b\u0082\3\2\2\2\u008b\u0085\3\2\2\2\u008b\u0088"+
-		"\3\2\2\2\u008c\u008f\3\2\2\2\u008d\u008b\3\2\2\2\u008d\u008e\3\2\2\2\u008e"+
-		"\31\3\2\2\2\u008f\u008d\3\2\2\2\u0090\u0093\t\3\2\2\u0091\u0093\7\32\2"+
-		"\2\u0092\u0090\3\2\2\2\u0092\u0091\3\2\2\2\u0093\33\3\2\2\2\u0094\u0097"+
-		"\t\4\2\2\u0095\u0097\7\32\2\2\u0096\u0094\3\2\2\2\u0096\u0095\3\2\2\2"+
-		"\u0097\35\3\2\2\2\u0098\u0099\7\31\2\2\u0099\u009a\7\32\2\2\u009a\u009b"+
-		"\7\3\2\2\u009b\u009c\t\5\2\2\u009c\37\3\2\2\2\u009d\u009e\7\4\2\2\u009e"+
-		"\u009f\t\6\2\2\u009f!\3\2\2\2\21%-\60:>PZbdo}\u008b\u008d\u0092\u0096";
+		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
+		"\4\23\t\23\4\24\t\24\3\2\7\2*\n\2\f\2\16\2-\13\2\3\2\3\2\3\3\3\3\3\3\5"+
+		"\3\64\n\3\3\3\5\3\67\n\3\3\4\3\4\3\4\3\4\3\4\3\4\7\4?\n\4\f\4\16\4B\13"+
+		"\4\3\4\5\4E\n\4\3\5\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3"+
+		"\b\7\bU\n\b\f\b\16\bX\13\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\5\ta\n\t\3\t\3"+
+		"\t\3\t\3\t\3\t\3\t\7\ti\n\t\f\t\16\tl\13\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n"+
+		"\3\n\5\nv\n\n\3\13\3\13\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\5\r\u0084"+
+		"\n\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\7\r\u0095"+
+		"\n\r\f\r\16\r\u0098\13\r\3\16\3\16\5\16\u009c\n\16\3\17\3\17\5\17\u00a0"+
+		"\n\17\3\20\3\20\3\20\3\20\3\20\3\21\3\21\3\21\3\22\3\22\3\22\5\22\u00ad"+
+		"\n\22\3\23\3\23\5\23\u00b1\n\23\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24"+
+		"\3\24\5\24\u00bc\n\24\3\24\2\4\20\30\25\2\4\6\b\n\f\16\20\22\24\26\30"+
+		"\32\34\36 \"$&\2\4\3\2\21\26\3\2\n\13\2\u00c7\2+\3\2\2\2\4\63\3\2\2\2"+
+		"\68\3\2\2\2\bF\3\2\2\2\nL\3\2\2\2\fQ\3\2\2\2\16V\3\2\2\2\20`\3\2\2\2\22"+
+		"u\3\2\2\2\24w\3\2\2\2\26y\3\2\2\2\30\u0083\3\2\2\2\32\u009b\3\2\2\2\34"+
+		"\u009f\3\2\2\2\36\u00a1\3\2\2\2 \u00a6\3\2\2\2\"\u00ac\3\2\2\2$\u00b0"+
+		"\3\2\2\2&\u00bb\3\2\2\2(*\5\4\3\2)(\3\2\2\2*-\3\2\2\2+)\3\2\2\2+,\3\2"+
+		"\2\2,.\3\2\2\2-+\3\2\2\2./\7\2\2\3/\3\3\2\2\2\60\64\5\36\20\2\61\64\5"+
+		" \21\2\62\64\5\6\4\2\63\60\3\2\2\2\63\61\3\2\2\2\63\62\3\2\2\2\64\66\3"+
+		"\2\2\2\65\67\7!\2\2\66\65\3\2\2\2\66\67\3\2\2\2\67\5\3\2\2\289\7\5\2\2"+
+		"9:\5\f\7\2:;\7\37\2\2;<\5\16\b\2<@\7 \2\2=?\5\b\5\2>=\3\2\2\2?B\3\2\2"+
+		"\2@>\3\2\2\2@A\3\2\2\2AD\3\2\2\2B@\3\2\2\2CE\5\n\6\2DC\3\2\2\2DE\3\2\2"+
+		"\2E\7\3\2\2\2FG\7\6\2\2GH\5\f\7\2HI\7\37\2\2IJ\5\16\b\2JK\7 \2\2K\t\3"+
+		"\2\2\2LM\7\7\2\2MN\7\37\2\2NO\5\16\b\2OP\7 \2\2P\13\3\2\2\2QR\5\20\t\2"+
+		"R\r\3\2\2\2SU\5\4\3\2TS\3\2\2\2UX\3\2\2\2VT\3\2\2\2VW\3\2\2\2W\17\3\2"+
+		"\2\2XV\3\2\2\2YZ\b\t\1\2Za\5\22\n\2[\\\7\35\2\2\\]\5\20\t\2]^\7\36\2\2"+
+		"^a\3\2\2\2_a\5\32\16\2`Y\3\2\2\2`[\3\2\2\2`_\3\2\2\2aj\3\2\2\2bc\f\7\2"+
+		"\2cd\7\b\2\2di\5\20\t\bef\f\6\2\2fg\7\t\2\2gi\5\20\t\7hb\3\2\2\2he\3\2"+
+		"\2\2il\3\2\2\2jh\3\2\2\2jk\3\2\2\2k\21\3\2\2\2lj\3\2\2\2mn\5\24\13\2n"+
+		"o\5\26\f\2op\5\24\13\2pv\3\2\2\2qr\7\35\2\2rs\5\22\n\2st\7\36\2\2tv\3"+
+		"\2\2\2um\3\2\2\2uq\3\2\2\2v\23\3\2\2\2wx\5\30\r\2x\25\3\2\2\2yz\t\2\2"+
+		"\2z\27\3\2\2\2{|\b\r\1\2|}\7\20\2\2}\u0084\5\30\r\5~\177\7\35\2\2\177"+
+		"\u0080\5\30\r\2\u0080\u0081\7\36\2\2\u0081\u0084\3\2\2\2\u0082\u0084\5"+
+		"\34\17\2\u0083{\3\2\2\2\u0083~\3\2\2\2\u0083\u0082\3\2\2\2\u0084\u0096"+
+		"\3\2\2\2\u0085\u0086\f\n\2\2\u0086\u0087\7\f\2\2\u0087\u0095\5\30\r\13"+
+		"\u0088\u0089\f\t\2\2\u0089\u008a\7\r\2\2\u008a\u0095\5\30\r\n\u008b\u008c"+
+		"\f\b\2\2\u008c\u008d\7\16\2\2\u008d\u0095\5\30\r\t\u008e\u008f\f\7\2\2"+
+		"\u008f\u0090\7\17\2\2\u0090\u0095\5\30\r\b\u0091\u0092\f\6\2\2\u0092\u0093"+
+		"\7\20\2\2\u0093\u0095\5\30\r\7\u0094\u0085\3\2\2\2\u0094\u0088\3\2\2\2"+
+		"\u0094\u008b\3\2\2\2\u0094\u008e\3\2\2\2\u0094\u0091\3\2\2\2\u0095\u0098"+
+		"\3\2\2\2\u0096\u0094\3\2\2\2\u0096\u0097\3\2\2\2\u0097\31\3\2\2\2\u0098"+
+		"\u0096\3\2\2\2\u0099\u009c\t\3\2\2\u009a\u009c\7\34\2\2\u009b\u0099\3"+
+		"\2\2\2\u009b\u009a\3\2\2\2\u009c\33\3\2\2\2\u009d\u00a0\5$\23\2\u009e"+
+		"\u00a0\7\34\2\2\u009f\u009d\3\2\2\2\u009f\u009e\3\2\2\2\u00a0\35\3\2\2"+
+		"\2\u00a1\u00a2\7\33\2\2\u00a2\u00a3\7\34\2\2\u00a3\u00a4\7\3\2\2\u00a4"+
+		"\u00a5\5\"\22\2\u00a5\37\3\2\2\2\u00a6\u00a7\7\4\2\2\u00a7\u00a8\5\"\22"+
+		"\2\u00a8!\3\2\2\2\u00a9\u00ad\5\30\r\2\u00aa\u00ad\5\20\t\2\u00ab\u00ad"+
+		"\5&\24\2\u00ac\u00a9\3\2\2\2\u00ac\u00aa\3\2\2\2\u00ac\u00ab\3\2\2\2\u00ad"+
+		"#\3\2\2\2\u00ae\u00b1\7\30\2\2\u00af\u00b1\7\27\2\2\u00b0\u00ae\3\2\2"+
+		"\2\u00b0\u00af\3\2\2\2\u00b1%\3\2\2\2\u00b2\u00b3\7\35\2\2\u00b3\u00b4"+
+		"\5\"\22\2\u00b4\u00b5\7\36\2\2\u00b5\u00bc\3\2\2\2\u00b6\u00bc\5$\23\2"+
+		"\u00b7\u00bc\t\3\2\2\u00b8\u00bc\7\34\2\2\u00b9\u00bc\7\31\2\2\u00ba\u00bc"+
+		"\7\32\2\2\u00bb\u00b2\3\2\2\2\u00bb\u00b6\3\2\2\2\u00bb\u00b7\3\2\2\2"+
+		"\u00bb\u00b8\3\2\2\2\u00bb\u00b9\3\2\2\2\u00bb\u00ba\3\2\2\2\u00bc\'\3"+
+		"\2\2\2\24+\63\66@DV`hju\u0083\u0094\u0096\u009b\u009f\u00ac\u00b0\u00bb";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -127,6 +127,13 @@ public interface LemonVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArithmeticExpressionMinus(LemonParser.ArithmeticExpressionMinusContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ArithmeticExpressionMod}
+	 * labeled alternative in {@link LemonParser#arithmetic_expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithmeticExpressionMod(LemonParser.ArithmeticExpressionModContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code ArithmeticExpressionParens}
 	 * labeled alternative in {@link LemonParser#arithmetic_expression}.
 	 * @param ctx the parse tree
@@ -201,4 +208,81 @@ public interface LemonVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitShow(LemonParser.ShowContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ExpressionArithmetic}
+	 * labeled alternative in {@link LemonParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpressionArithmetic(LemonParser.ExpressionArithmeticContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ExpressionLogical}
+	 * labeled alternative in {@link LemonParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpressionLogical(LemonParser.ExpressionLogicalContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ExpressionAtom}
+	 * labeled alternative in {@link LemonParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpressionAtom(LemonParser.ExpressionAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IntAtom}
+	 * labeled alternative in {@link LemonParser#number_atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntAtom(LemonParser.IntAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code FloatAtom}
+	 * labeled alternative in {@link LemonParser#number_atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFloatAtom(LemonParser.FloatAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ParenExpression}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParenExpression(LemonParser.ParenExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code NumberAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumberAtom(LemonParser.NumberAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code BooleanAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBooleanAtom(LemonParser.BooleanAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IdentifierAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifierAtom(LemonParser.IdentifierAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code StringAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStringAtom(LemonParser.StringAtomContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code NulAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNulAtom(LemonParser.NulAtomContext ctx);
 }

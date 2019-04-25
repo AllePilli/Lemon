@@ -205,6 +205,18 @@ public interface LemonListener extends ParseTreeListener {
 	 */
 	void exitArithmeticExpressionMinus(LemonParser.ArithmeticExpressionMinusContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code ArithmeticExpressionMod}
+	 * labeled alternative in {@link LemonParser#arithmetic_expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterArithmeticExpressionMod(LemonParser.ArithmeticExpressionModContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ArithmeticExpressionMod}
+	 * labeled alternative in {@link LemonParser#arithmetic_expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitArithmeticExpressionMod(LemonParser.ArithmeticExpressionModContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code ArithmeticExpressionParens}
 	 * labeled alternative in {@link LemonParser#arithmetic_expression}.
 	 * @param ctx the parse tree
@@ -332,4 +344,136 @@ public interface LemonListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitShow(LemonParser.ShowContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ExpressionArithmetic}
+	 * labeled alternative in {@link LemonParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressionArithmetic(LemonParser.ExpressionArithmeticContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ExpressionArithmetic}
+	 * labeled alternative in {@link LemonParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressionArithmetic(LemonParser.ExpressionArithmeticContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ExpressionLogical}
+	 * labeled alternative in {@link LemonParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressionLogical(LemonParser.ExpressionLogicalContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ExpressionLogical}
+	 * labeled alternative in {@link LemonParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressionLogical(LemonParser.ExpressionLogicalContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ExpressionAtom}
+	 * labeled alternative in {@link LemonParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressionAtom(LemonParser.ExpressionAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ExpressionAtom}
+	 * labeled alternative in {@link LemonParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressionAtom(LemonParser.ExpressionAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IntAtom}
+	 * labeled alternative in {@link LemonParser#number_atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntAtom(LemonParser.IntAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IntAtom}
+	 * labeled alternative in {@link LemonParser#number_atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntAtom(LemonParser.IntAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code FloatAtom}
+	 * labeled alternative in {@link LemonParser#number_atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterFloatAtom(LemonParser.FloatAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code FloatAtom}
+	 * labeled alternative in {@link LemonParser#number_atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitFloatAtom(LemonParser.FloatAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ParenExpression}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterParenExpression(LemonParser.ParenExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ParenExpression}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitParenExpression(LemonParser.ParenExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code NumberAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumberAtom(LemonParser.NumberAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code NumberAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumberAtom(LemonParser.NumberAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code BooleanAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanAtom(LemonParser.BooleanAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code BooleanAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanAtom(LemonParser.BooleanAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IdentifierAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifierAtom(LemonParser.IdentifierAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IdentifierAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifierAtom(LemonParser.IdentifierAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code StringAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterStringAtom(LemonParser.StringAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code StringAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitStringAtom(LemonParser.StringAtomContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code NulAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void enterNulAtom(LemonParser.NulAtomContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code NulAtom}
+	 * labeled alternative in {@link LemonParser#atom}.
+	 * @param ctx the parse tree
+	 */
+	void exitNulAtom(LemonParser.NulAtomContext ctx);
 }

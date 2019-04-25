@@ -22,6 +22,20 @@ class MyLemonVisitor: LemonBaseVisitor<Value>() {
         return Value(left.asDouble() * right.asDouble())
     }
 
+    override fun visitArithmeticExpressionDiv(ctx: LemonParser.ArithmeticExpressionDivContext?): Value {
+        val left = visit(ctx!!.arithmetic_expression(0))
+        val right = visit(ctx.arithmetic_expression(1))
+
+        return Value(left.asDouble() / right.asDouble())
+    }
+
+    override fun visitArithmeticExpressionMod(ctx: LemonParser.ArithmeticExpressionModContext?): Value {
+        val left = visit(ctx!!.arithmetic_expression(0))
+        val right = visit(ctx.arithmetic_expression(1))
+
+        return Value(left.asDouble() % right.asDouble())
+    }
+
     /**
      * Prints the memory to the console
      */

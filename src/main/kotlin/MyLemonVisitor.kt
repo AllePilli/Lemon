@@ -5,7 +5,7 @@ class MyLemonVisitor: LemonBaseVisitor<Value>() {
     }
 
     // Variable storage (only 1 global scope)
-    private val memory: Map<String, Value> = mapOf()
+    private val memory: MutableMap<String, Value> = mutableMapOf()
 
     /**
      * {@inheritDoc}
@@ -15,7 +15,16 @@ class MyLemonVisitor: LemonBaseVisitor<Value>() {
      * [.visitChildren] on `ctx`.
      */
     override fun visitDeclaration(ctx: LemonParser.DeclarationContext?): Value {
-        println(ctx!!.text)
-        return super.visitDeclaration(ctx)
+        val identifier = ctx!!.IDENTIFIER().text
+        val value = visit(ctx.expression())
+        return memory.put(identifier, value) ?: Value.VOID
+    }
+
+    /**
+     * Prints the memory to the console
+     */
+    fun printMemory(){
+        println("MyLemonVisitor Memory:")
+        memory.forEach { k, v -> println("\t$k = $v") }
     }
 }

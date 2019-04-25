@@ -11,4 +11,5 @@ fun main() {
 
     val visitor = MyLemonVisitor()
     val result = visitor.visit(parser.declaration())
+    println("result = $result")
 }

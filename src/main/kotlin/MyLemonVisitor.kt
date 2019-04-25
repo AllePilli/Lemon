@@ -21,6 +21,15 @@ class MyLemonVisitor: LemonBaseVisitor<Value>() {
     }
 
     /**
+     * {@inheritDoc}
+     *
+     *
+     * The default implementation returns the result of calling
+     * [.visitChildren] on `ctx`.
+     */
+    override fun visitExpressionArithmetic(ctx: LemonParser.ExpressionArithmeticContext?) = visit(ctx!!.arithmetic_expression())
+
+    /**
      * Prints the memory to the console
      */
     fun printMemory(){
